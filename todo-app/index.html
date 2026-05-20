@@ -1,0 +1,170 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hidden-el {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-white min-h-screen flex items-center justify-center font-sans antialiased selection:bg-indigo-500 selection:text-white p-4">
+
+    <!-- Container Principal -->
+    <div id="app" class="w-full">
+        
+        <!-- Tela de Login -->
+        <div id="login-screen" class="glass rounded-2xl p-8 shadow-2xl transition-all duration-300 w-full max-w-md mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold tracking-tight text-white mb-2">Bem-vindo de volta</h1>
+                <p class="text-slate-400 text-sm">Faça login para acessar suas tarefas</p>
+            </div>
+
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="login-email" class="block text-sm font-medium text-slate-300 mb-1">E-mail</label>
+                    <input type="email" id="login-email" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="seu@email.com">
+                    <p id="login-email-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                </div>
+                
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-slate-300 mb-1">Senha</label>
+                    <input type="password" id="login-password" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="••••••••">
+                    <p id="login-password-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                </div>
+
+                <p id="login-general-error" class="text-red-400 text-sm text-center hidden-el"></p>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-lg shadow-indigo-500/30">
+                    Entrar
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-sm text-slate-400">
+                Não tem uma conta? 
+                <button id="show-register" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Cadastre-se</button>
+            </p>
+        </div>
+
+        <!-- Tela de Cadastro -->
+        <div id="register-screen" class="glass rounded-2xl p-8 shadow-2xl hidden-el transition-all duration-300 w-full max-w-md mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold tracking-tight text-white mb-2">Criar Conta</h1>
+                <p class="text-slate-400 text-sm">Junte-se a nós para organizar seu dia</p>
+            </div>
+
+            <form id="register-form" class="space-y-6">
+                <div>
+                    <label for="register-name" class="block text-sm font-medium text-slate-300 mb-1">Nome</label>
+                    <input type="text" id="register-name" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="Seu nome">
+                    <p id="register-name-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                </div>
+
+                <div>
+                    <label for="register-email" class="block text-sm font-medium text-slate-300 mb-1">E-mail</label>
+                    <input type="email" id="register-email" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="seu@email.com">
+                    <p id="register-email-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                </div>
+                
+                <div>
+                    <label for="register-password" class="block text-sm font-medium text-slate-300 mb-1">Senha</label>
+                    <input type="password" id="register-password" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="••••••••">
+                    <p id="register-password-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                </div>
+
+                <p id="register-general-error" class="text-red-400 text-sm text-center hidden-el"></p>
+
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-lg shadow-indigo-500/30">
+                    Cadastrar
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-sm text-slate-400">
+                Já tem uma conta? 
+                <button id="show-login" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Fazer login</button>
+            </p>
+        </div>
+
+        <!-- Tela Principal (To-Do) -->
+        <div id="todo-screen" class="glass rounded-2xl p-8 shadow-2xl hidden-el transition-all duration-300 w-full max-w-2xl mx-auto">
+            <div class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-white tracking-tight">Painel de Tarefas</h1>
+                    <p id="welcome-message" class="text-indigo-400 font-medium"></p>
+                </div>
+                <button id="logout-btn" class="text-slate-300 hover:text-white bg-slate-800/50 hover:bg-slate-700/80 px-4 py-2 rounded-lg text-sm font-medium transition-colors border border-slate-700 shadow-sm">
+                    Sair
+                </button>
+            </div>
+            
+            <!-- Formulário de Nova Tarefa -->
+            <form id="task-form" class="bg-slate-800/30 p-6 rounded-xl border border-slate-700/50 mb-8 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2">
+                        <label for="task-title" class="block text-sm font-medium text-slate-300 mb-1">Título da tarefa *</label>
+                        <input type="text" id="task-title" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors" placeholder="O que você precisa fazer?" required>
+                        <!-- Elemento adicionado para exibir erro caso o título seja vazio -->
+                        <p id="task-title-error" class="text-red-400 text-xs mt-1 hidden-el"></p>
+                    </div>
+                    <div>
+                        <label for="task-type" class="block text-sm font-medium text-slate-300 mb-1">Tipo</label>
+                        <select id="task-type" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors appearance-none cursor-pointer">
+                            <option value="Trabalho" class="bg-slate-800">Trabalho</option>
+                            <option value="Pessoal" class="bg-slate-800">Pessoal</option>
+                            <option value="Estudos" class="bg-slate-800">Estudos</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="task-desc" class="block text-sm font-medium text-slate-300 mb-1">Descrição (opcional)</label>
+                    <textarea id="task-desc" rows="2" class="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors resize-none" placeholder="Detalhes adicionais..."></textarea>
+                </div>
+                
+                <div class="flex justify-end pt-2">
+                    <button type="submit" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 px-6 rounded-lg transition-colors duration-200 shadow-lg shadow-indigo-500/30">
+                        Adicionar Tarefa
+                    </button>
+                </div>
+            </form>
+
+            <!-- Lista de Tarefas -->
+            <div>
+                <h2 class="text-lg font-semibold text-white mb-4">Suas Tarefas</h2>
+                <div id="tasks-container" class="space-y-3">
+                    <!-- Cards de tarefas serão inseridos aqui pelo JS -->
+                </div>
+                <div id="no-tasks-message" class="text-center text-slate-400 py-10 hidden-el bg-slate-800/20 rounded-xl border border-slate-700/50 border-dashed">
+                    Nenhuma tarefa cadastrada ainda.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
